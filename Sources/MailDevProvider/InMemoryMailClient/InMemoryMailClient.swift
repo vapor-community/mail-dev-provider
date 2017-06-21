@@ -21,3 +21,9 @@ public final class InMemoryMailClient: MailProtocol {
 }
 
 extension InMemoryMailClient: EmptyInitializable {}
+
+extension InMemoryMailClient: ConfigInitializable {
+    public convenience init(config: Config) throws {
+        self.init()
+    }
+}

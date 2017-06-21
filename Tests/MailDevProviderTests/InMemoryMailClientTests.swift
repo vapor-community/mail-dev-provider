@@ -1,5 +1,5 @@
 import XCTest
-@testable import MailDev
+@testable import MailDevProvider
 import SMTP
 import Vapor
 
@@ -42,17 +42,17 @@ class InMemoryMailClientTests: XCTestCase {
     }
 
     func testDroplet() throws {
-        let drop = try Droplet(mail: InMemoryMailClient())
-
-        let email = Email(from: "from@email.com",
-                          to: "to1@email.com", "to2@email.com",
-                          subject: "Email Subject",
-                          body: "Hello Email")
-        let attachment = EmailAttachment(filename: "dummy.data",
-                                         contentType: "dummy/data",
-                                         body: [1,2,3,4,5])
-        email.attachments.append(attachment)
-        try drop.mail.send(email)
+        let config: Config = try [
+            "droplet": [
+                "mail": "in-memory"
+            ],
+        ].makeNode(in: nil).converted()
+        try config.addProvider(Provider.self)
+        let drop = try Droplet(config)
+        guard let _ = drop.mail as? InMemoryMailClient else {
+            XCTFail("drop.mail is \(drop.mail)")
+            return
+        }
     }
 
 }

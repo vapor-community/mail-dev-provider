@@ -36,3 +36,9 @@ public final class ConsoleMailClient: MailProtocol {
 }
 
 extension ConsoleMailClient: EmptyInitializable {}
+
+extension ConsoleMailClient: ConfigInitializable {
+    public convenience init(config: Config) throws {
+        self.init()
+    }
+}

@@ -1,7 +1,7 @@
 #if os(Linux)
 
 import XCTest
-@testable import MailDevTests
+@testable import MailDevProviderTests
 
 XCTMain([
     testCase(ConsoleMailClientTests.allTests),
