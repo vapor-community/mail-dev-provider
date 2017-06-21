@@ -54,6 +54,8 @@ try drop.mail.send(email)
 Emails sent by the `ConsoleMailClient` will be displayed in the console.
 
 ```swift
+import SMTP
+
 let email = Email(
     from: "from@email.com",
     to: "recipient@email.com"
@@ -67,7 +69,8 @@ Emails sent by the `InMemoryMailClient` will be stored in the client's
 `sentEmails` property.
 
 ```swift
-import MailDev
+import MailDevProvider
+import SMTP
 
 let email = Email(
     from: "from@email.com",
